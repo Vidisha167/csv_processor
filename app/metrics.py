@@ -10,6 +10,12 @@ UPLOADS_TOTAL = Counter("csv_uploads_total", "CSV files accepted for processing"
 
 class JobStatusCollector:
     """Runs on every scrape and reports how many jobs are in each status."""
+    def describe(self):
+    	yield GaugeMetricFamily(
+        	"csv_jobs",
+        	"Number of jobs by status",
+        	labels=["status"]
+    	)
 
     def collect(self):
         gauge = GaugeMetricFamily(
